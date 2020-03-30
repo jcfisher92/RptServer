@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   targetNamespace="http://www.emeryonline.com/ups"
+   xmlns="http://www.emeryonline.com/ups"
+   elementFormDefault="qualified">
+
+   <xs:complexType name="shipment">
+      <xs:sequence>
+         <xs:element name="orderId" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+         <xs:element name="tmsCartonId" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+         <xs:element name="shipId" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+         <xs:element name="poNum" type="xs:string" minOccurs="1" maxOccurs="1" />
+         <xs:element name="trackingNbr" type="xs:string" minOccurs="1" maxOccurs="1" />
+         <xs:element name="actualFrt" type="xs:double" minOccurs="1" maxOccurs="1" />
+         <xs:element name="discountedFrt" type="xs:double" minOccurs="1" maxOccurs="1" />
+         <xs:element name="shipDate" type="xs:date" minOccurs="1" maxOccurs="1" />
+         <xs:element name="weight" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+         <xs:element name="overSize" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+         <xs:element name="saturdayDelivery" type="xs:decimal" minOccurs="1" maxOccurs="1" />
+      </xs:sequence>
+   </xs:complexType>
+   
+   <xs:element name="upsTracking">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="shipment" type="shipment" minOccurs="0" maxOccurs="unbounded" />            
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

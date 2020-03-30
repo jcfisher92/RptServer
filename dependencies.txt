@@ -1,0 +1,14 @@
+Under construction ...
+
+Apache Commons
+   commons-io-1.4.jar
+
+Emery Libraries:
+   emloader-j1.5.jar
+   emwebsvc-2.1.jar
+   rebat-1.0.jar
+   emobjs-2.9.7.jar
+   emutils-3.1.0.jar
+   oagis-2.7.2.jar
+   webshared-2.9.3.jar
+   wsbeans-2.1.2.jar

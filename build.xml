@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="rptserver" basedir="." default="install">
+   <target name="install" >
+      <copy todir="target/RptServer">
+       <fileset dir="./bin"/>
+     </copy>
+      <if>
+         <equals arg1="${env}" arg2="prod" />
+         <then>
+            <copy file="server.properties" todir="target/RptServer" />
+         </then>
+         <else>
+            <copy file="server.test.properties" tofile="target/RptServer/server.properties" />
+         </else>
+      </if>
+      
+      <copy file="logcfg.xml" todir="target/RptServer" />
+      <copy file="startsvr" todir="target/RptServer" />
+      <copy file="rptsrv.sh" todir="target/RptServer" />
+      <copy file="bemail.lst" todir="target/RptServer" />
+   </target>
+   <target name="deploy">
+      <sshexec host="${scp.host}" username="${scp.username}" 
+         password="${scp.password}" trust="true" 
+         command="rm -r /usr/local/rptserver/*;mkdir -p /usr/local/rptserver/log;mkdir -p /usr/local/rptserver/reports;" output="sshexec.out" />
+      <scp trust="true" file="target/RptServer" todir="${deploy.path}">
+         <fileset dir="target/RptServer" />
+      </scp>
+      <sshexec host="${scp.host}" username="${scp.username}" 
+         password="${scp.password}" trust="true" 
+         command="chmod u+x /usr/local/rptserver/rptsrv.sh;" output="sshexec.out" />
+   </target>
+</project>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Name: catalogexp.xsd
+	Description: Data structures for exporting the Emery catalog.  Merge between the old catalog export
+      schema and the new catalog data structures.
+
+	Author: Jeff Fisher
+
+	Create Date: 05/27/2009
+	Last Update: $Id: catalogexp.xsd,v 1.3 2014/07/31 14:32:33 jfisher Exp $
+
+   History:
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   targetNamespace="http://www.emeryonline.com/catalog"
+   xmlns="http://www.emeryonline.com/catalog"
+   elementFormDefault="qualified">
+
+   <!-- Additional item attributes defining the item -->
+   <xs:complexType name="attribute">
+      <xs:sequence>
+         <xs:element name="name" type="xs:string" />
+         <xs:element name="value" type="xs:string" minOccurs="0" />
+         <xs:element name="uom" type="xs:string" minOccurs="0" />
+      </xs:sequence>
+   </xs:complexType>
+
+   <!-- Catalog bullet points describing the item -->
+   <xs:complexType name="bullet">
+      <xs:sequence>
+         <xs:element name="point" type="xs:string" />
+         <xs:element name="seqNbr" type="xs:integer" minOccurs="0" />
+      </xs:sequence>
+   </xs:complexType>
+
+   <!-- Taxonomy type definition -->
+   <xs:complexType name="category">
+      <xs:sequence>
+         <xs:element name="id" type="xs:integer" />
+         <xs:element name="name" type="xs:string" />
+         <xs:element name="level" type="xs:string" />
+         <xs:element name="parentId" type="xs:integer" minOccurs="0" />
+      </xs:sequence>
+   </xs:complexType>
+
+   <!-- Catalog location information.  Provides grouping and similar items. -->
+   <xs:complexType name="location">
+      <xs:sequence>
+         <xs:element name="id" type="xs:integer" />
+         <xs:element name="name" type="xs:string" />
+         <xs:element name="parentId" type="xs:integer" minOccurs="0" />
+      </xs:sequence>
+   </xs:complexType>
+
+   <!-- Manufacturer type definition -->
+   <xs:complexType name="vendor">
+      <xs:sequence>
+         <xs:element name="id" type="xs:integer" />
+         <xs:element name="name" type="xs:string" />
+      </xs:sequence>
+   </xs:complexType>
+
+   <!-- Hazardous (MSDS) information -->
+   <xs:complexType name="hazardous">
+      <xs:sequence>
+         <xs:element name="transport" type="xs:string"/>
+         <xs:element name="aerosol" type="xs:string"/>
+         <xs:element name="flammable" type="xs:string"/>
+         <xs:element name="flammablePlastic" type="xs:string"/>
+         <xs:element name="transCode" type="xs:string"/>
+         <xs:element name="class" type="xs:string" minOccurs="0"/>
+         <xs:element name="unnaCode" type="xs:string" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+      
+   <!--  alternate classification information -->
+   <xs:complexType name="classification">
+      <xs:sequence>
+         <xs:element name="mdseClassCd" type="xs:string" minOccurs="0"/>
+         <xs:element name="cmdtyGroup" type="xs:string" minOccurs="0"/>
+         <xs:element name="prodGroup" type="xs:string" minOccurs="0"/>        
+      </xs:sequence>
+   </xs:complexType>
+   
+   <!-- The Emery item information including sub type information -->
+   <xs:complexType name="catalogItem">
+      <xs:sequence>
+         <xs:element name="sku" type="xs:string" />
+         <xs:element name="description" type="xs:string" minOccurs="0" />
+         <xs:element name="upc" type="xs:string" minOccurs="0" />
+         <xs:element name="vendorSku" type="xs:string" minOccurs="0"/>
+         <xs:element name="vendor" type="vendor" minOccurs="0" />
+         <xs:element name="imageUrlSm" type="xs:string" minOccurs="0" />
+         <xs:element name="imageUrlMd" type="xs:string" minOccurs="0" />
+         <xs:element name="imageUrlLg" type="xs:string" minOccurs="0" />
+         <xs:element name="brokenCase" type="xs:string" minOccurs="0" />
+         <xs:element name="dealerPack" type="xs:integer" minOccurs="0" />
+         <xs:element name="packOf" type="xs:integer" minOccurs="0" />
+         <xs:element name="cost" type="xs:decimal" minOccurs="0" />
+         <xs:element name="retail" type="xs:decimal" minOccurs="0" />
+         <xs:element name="length" type="xs:decimal" minOccurs="0" />
+         <xs:element name="width" type="xs:decimal" minOccurs="0" />
+         <xs:element name="height" type="xs:decimal" minOccurs="0" />
+         <xs:element name="weight" type="xs:decimal" minOccurs="0" />
+         <xs:element name="cube" type="xs:decimal" minOccurs="0" />
+         <xs:element name="uom" type="xs:string" minOccurs="0" />
+         <xs:element name="flc" type="xs:string" minOccurs="0" />
+         <xs:element name="mdc" type="xs:string" minOccurs="0" />
+         <xs:element name="nrha" type="xs:string" minOccurs="0" />
+         <xs:element name ="classification" type="classification" minOccurs="0"/>
+         <xs:element name="brandName" type="xs:string" minOccurs="0" />
+         <xs:element name="noun" type="xs:string" minOccurs="0" />
+         <xs:element name="modifier" type="xs:string" minOccurs="0" />
+         <xs:element name="attribute" type="attribute" minOccurs="0" maxOccurs="unbounded" />
+         <xs:element name="bullet" type="bullet" minOccurs="0" maxOccurs="unbounded" />
+         <xs:element name="category" type="category" minOccurs="0" maxOccurs="unbounded" />
+         <xs:element name="location" type="location" minOccurs="0" maxOccurs="unbounded" />
+         <xs:element name="hazardous" type="hazardous" minOccurs="0" maxOccurs="3"/>
+         <xs:element name="retailA" type="xs:decimal" minOccurs="0" />
+         <xs:element name="retailB" type="xs:decimal" minOccurs="0" />
+         <xs:element name="retailC" type="xs:decimal" minOccurs="0" />
+         <xs:element name="retailD" type="xs:decimal" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="status" type="xs:string" use="optional">
+	      <xs:annotation>
+	         <xs:documentation>A single character value that determines the status of the item entry.  A = add, C = change, D = delete</xs:documentation>
+	      </xs:annotation>
+	   </xs:attribute>
+   </xs:complexType>
+
+   <!--  -->
+   <xs:element name="catalog">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="catalogItem" type="catalogItem" minOccurs="1" maxOccurs="unbounded" />
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>
